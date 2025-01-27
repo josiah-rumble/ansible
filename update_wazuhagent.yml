@@ -1,0 +1,34 @@
+---
+- name: Run commands to configure Wazuh repository and install Wazuh agent
+  hosts: all
+  become: yes
+  tasks:
+    - name: Import Wazuh GPG key
+      shell: |
+        curl -s https://packages.wazuh.com/key/GPG-KEY-WAZUH | gpg --no-default-keyring --keyring /usr/share/keyrings/wazuh.gpg --import
+        chmod 644 /usr/share/keyrings/wazuh.gpg
+      args:
+        creates: /usr/share/keyrings/wazuh.gpg
+
+    - name: Add Wazuh repository to sources.list
+      shell: |
+        echo "deb [signed-by=/usr/share/keyrings/wazuh.gpg] https://packages.wazuh.com/4.x/apt/ stable main" | tee -a /etc/apt/sources.list.d/wazuh.list
+      args:
+        creates: /etc/apt/sources.list.d/wazuh.list
+
+    - name: Update apt package list
+      apt:
+        update_cache: yes
+
+    - name: Install Wazuh agent version 4.8.2-1
+      apt:
+        name: wazuh-agent=4.8.2-1
+        state: present
+
+    - name: Comment out Wazuh repository from sources.list
+      shell: |
+        sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
+
+    - name: Update apt package list again
+      apt:
+        update_cache: yes
