@@ -4,6 +4,12 @@ git status
 Add items that will go to repo
 git add "name of file"
 
+Add All Files
+git add .
+
+Add Specific File Patterns
+git add *.yml *.sh
+
 commit file with massage labeling file/files
 git commit -m "chosen messgae"
 
