@@ -1,0 +1,14 @@
+Ping ansible servers in inventory
+ansible all -m ping
+
+List all hosts
+ansible all --list-hosts
+
+Get info on hosts
+ansible all -m gather_facts
+
+Syntax Checking .yml
+ansible-playbook playbook.yml --syntax-check
+
+Dry Run (Check Mode)
+ansible-playbook playbook.yml --check
