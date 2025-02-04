@@ -1,3 +1,15 @@
+Check was hasnt been added to repo
+git status
+
+Add items that will go to repo
+git add "name of file"
+
+commit file with massage labeling file/files
+git commit -m "chosen messgae"
+
+Adding all file to git repo
+git push origin main (main in my case for now)
+
 Ping ansible servers in inventory
 ansible all -m ping
 
