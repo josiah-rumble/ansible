@@ -1,0 +1,15 @@
+---
+- name: Install Wazuh agent from dashboard commands
+  hosts: all
+  become: yes
+  tasks:
+    - name: run wget
+      shell: |
+        wget https://packages.wazuh.com/4.x/apt/pool/main/w/wazuh-agent/wazuh-agent_4.8.2-1_amd64.deb && sudo WAZUH_MANAGER='192.168.3.54' dpkg -i ./wazuh-agent_4.8.2-1_amd64.deb
+
+    - name: Reload systemd and enable wazuh-agent
+      systemd:
+        name: wazuh-agent
+        state: started
+        enabled: yes
+        daemon_reload: yes
