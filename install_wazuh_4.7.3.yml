@@ -33,14 +33,3 @@
         state: started
         enabled: yes
         daemon_reload: yes
-
-    - name: Comment out Wazuh repository from sources.list
-      shell: |
-        sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
-
-    - name: Update apt package list again
-      apt:
-        update_cache: yes
-
-    - name: Hold wazuh-agent package
-      shell: echo "wazuh-agent hold" | dpkg --set-selections

@@ -1,0 +1,13 @@
+---
+- name: Remove Wazuh Agent using shell commands
+  hosts: all
+  become: yes
+  tasks:
+    - name: Remove Wazuh agent package
+      shell: apt-get remove -y wazuh-agent
+
+    - name: Purge Wazuh agent package
+      shell: apt-get remove --purge -y wazuh-agent
+
+    - name: Reload systemd daemon
+      shell: systemctl daemon-reload

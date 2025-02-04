@@ -24,11 +24,3 @@
       apt:
         name: wazuh-agent=4.8.1-1
         state: present
-
-    - name: Comment out Wazuh repository from sources.list
-      shell: |
-        sed -i "s/^deb/#deb/" /etc/apt/sources.list.d/wazuh.list
-
-    - name: Update apt package list again
-      apt:
-        update_cache: yes
